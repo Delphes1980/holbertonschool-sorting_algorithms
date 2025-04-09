@@ -16,20 +16,22 @@ void insertion_sort_list(listint_t **list)
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
+/*Start from the second node*/
 	current = (*list)->next;
 
 	while (current != NULL)
 	{
-		temp = current;
+		temp = current; /*Save current node to be inserted*/
 		current = current->next;
 
-
+/*Move temp back to its correct position in sorted part*/
 		while (temp->prev != NULL && temp->n < temp->prev->n)
 		{
-			before = temp->prev;
-			after = temp->next;
+			before = temp->prev; /*Node before temp*/
+			after = temp->next; /*Node after temp*/
 
-			if (before->prev)
+/*Update previous link of before node if exists*/
+			if (before->prev != NULL)
 			{
 				before->prev->next = temp;
 			}
@@ -38,17 +40,14 @@ void insertion_sort_list(listint_t **list)
 			temp->next = before;
 			before->prev = temp;
 			before->next = after;
-
-			if (after)
+/*Update previous link of before node if exists*/
+			if (after != NULL)
 				after->prev = before;
-
+/*If tmp is now the first node, update the head of the list*/
 			if (temp->prev == NULL)
 				*list = temp;
 
 			print_list(*list);
 		}
 	}
-	/*mémoriser la valeur dans temp*/
-
-	/*swapper les elements(nodes pas list->n)*/
 }
