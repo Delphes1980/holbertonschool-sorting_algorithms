@@ -6,7 +6,8 @@
 * @array: the array to be sorted in ascending order
 * @size: the size of the array
 *
-* Return: nothing
+* Return: nothing. The array will be printed each time
+* after 2 elements have been swapped
 */
 
 void selection_sort(int *array, size_t size)
