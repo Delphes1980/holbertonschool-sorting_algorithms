@@ -11,7 +11,7 @@
 void quick_sort_recursive(int *array, int low, int high, size_t size)
 {
 	int pivot;
-	int i = low, j, temp;
+	int i = low - 1, j, temp;
 
 	if (array == NULL || size < 2)
 		return;
@@ -19,7 +19,6 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
 	/*Base case: stop if there's 1 or no element*/
 	if (low >= high)
 		return;
-
 	/*The last element is choosen as pivot*/
 	pivot = array[high];
 
@@ -28,6 +27,8 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
 	{
 		if (array[j] < pivot)/*If current element is less than pivot*/
 		{
+			i++;/*Move the boundary of smaller element*/
+
 			if (i != j)/*Swap only if needed*/
 			{
 				temp = array[i];
@@ -35,21 +36,20 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
 				array[j] = temp;
 				print_array(array, size);
 			}
-			i++;/*Move the boundary of smaller element*/
 		}
 	}
 /*Puts the pivot to its corect position*/
-	if (i != high)
+	if (array[i + 1] != array[high])
 	{
-		temp = array[i];
-		array[i] = array[high];
+		temp = array[i + 1];
+		array[i + 1] = array[high];
 		array[high] = temp;
 		print_array(array, size);
 	}
 
 	/* Recursive calls for left and right sides */
-	quick_sort_recursive(array, low, i - 1, size);
-	quick_sort_recursive(array, i + 1, high, size);
+	quick_sort_recursive(array, low, i, size);
+	quick_sort_recursive(array, i + 2, high, size);
 }
 
 /**
