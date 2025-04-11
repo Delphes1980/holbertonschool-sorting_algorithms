@@ -1,14 +1,14 @@
 #include "sort.h"
 
 /**
- * quick_sort_recursive - Recursively sorts using quick sort logic.
+ * quick_sort_partition - Recursively sorts using quick sort logic.
  * @array: The array.
  * @low: The starting index.
  * @high: The ending index.
  * @size: The full size of the array (used for printing).
  */
 
-void quick_sort_recursive(int *array, int low, int high, size_t size)
+void quick_sort_partition(int *array, int low, int high, size_t size)
 {
 	int pivot;
 	int i = low - 1, j, temp;
@@ -48,8 +48,8 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
 	}
 
 	/* Recursive calls for left and right sides */
-	quick_sort_recursive(array, low, i, size);
-	quick_sort_recursive(array, i + 2, high, size);
+	quick_sort_partition(array, low, i, size);
+	quick_sort_partition(array, i + 2, high, size);
 }
 
 /**
@@ -70,5 +70,5 @@ void quick_sort(int *array, size_t size)
 		return;
 
 	/* Recursive quick sort with everything inside */
-	quick_sort_recursive(array, low, high, size);
+	quick_sort_partition(array, low, high, size);
 }
